@@ -9,6 +9,7 @@ import React, { useEffect, useState } from 'react';
 
 export default function Home({ data }) {
   const router = useRouter();
+
   useEffect(() => {
     if (data == false) {
       console.log('ife -gridi-+++++++');
@@ -16,10 +17,15 @@ export default function Home({ data }) {
     }
   }, []);
 
+  console.log(data, 'asdaadasd asd');
+
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
 
+  if (data == false) {
+    return <p>Kullanici GİRİŞİ YAPILMAMIŞ</p>;
+  }
   return (
     <div>
       <MyHeader></MyHeader>
@@ -50,53 +56,30 @@ export default function Home({ data }) {
 
 export async function getServerSideProps(context) {
   const cookies = parseCookies(context);
-  console.log(cookies.authToken);
 
-  try {
-    const response = await axios
-      .post('https://recipes-theta-eight.vercel.app/api/loggedIn', {
-        authToken: cookies.authToken,
-      })
-      .catch((e) => {
-        console.log(e);
-        return false;
-      });
+  const response = await axios
+    .post('http://localhost:3000/api/loggedIn', {
+      authToken: cookies.authToken,
+    })
+    .catch((e) => {
+      return false;
+    });
 
-    if (response == false) {
-      console.log(response);
+  console.log(response, '==============>');
 
-      return {
-        props: { data: false },
-      };
-    } else {
-      const recipes = await axios.get('https://dummyjson.com/recipes?limit=10');
-
-      const data = await recipes.data;
-
-      // BAŞKA İŞLEMLER
-
-      return {
-        props: { data },
-      };
-    }
-  } catch (error) {
+  if (response == false) {
     return {
-      redirect: {
-        destination: '/login',
-        permanent: false,
-      },
+      props: { data: false },
+    };
+  } else {
+    const recipes = await axios.get('https://dummyjson.com/recipes?limit=10');
+
+    const data = await recipes.data;
+
+    // BAŞKA İŞLEMLER
+
+    return {
+      props: { data },
     };
   }
 }
-
-/*
-catch (error) {
-    console.log(error, 'erroe');
-    return {
-      redirect: {
-        destination: '/den',
-        permanent: false,
-      },
-    };
-  }
-*/
