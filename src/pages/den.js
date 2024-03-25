@@ -53,7 +53,7 @@ export async function getServerSideProps(context) {
   console.log(cookies.authToken);
 
   const response = await axios
-    .post('http://localhost:3000/api/loggedIn', {
+    .post('https://recipes-theta-eight.vercel.app/loggedIn', {
       authToken: cookies.authToken,
     })
     .catch((e) => {
