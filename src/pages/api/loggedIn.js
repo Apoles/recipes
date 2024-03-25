@@ -4,6 +4,8 @@ import axios from 'axios';
 export default async function LoggedIn(req, res) {
   const tokent = req.body.authToken;
 
+  console.log(tokent);
+
   const userAuth = await axios
     .get('https://dummyjson.com/auth/me', {
       headers: {
@@ -11,6 +13,7 @@ export default async function LoggedIn(req, res) {
       },
     })
     .catch((e) => {
+      console.log(e);
       return res.status(401).json({ success: false, error: 'hatta', text: '401' });
     });
 
