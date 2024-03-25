@@ -13,6 +13,7 @@ export default async function LoggedIn(req, res) {
       },
     })
     .catch((e) => {
+      return e;
       console.log('error');
     });
 
