@@ -80,7 +80,6 @@ export async function getServerSideProps(context) {
       };
     }
   } catch (error) {
-    // Hata durumunda başka bir sayfaya yönlendirme
     return {
       redirect: {
         destination: '/login',

@@ -2,8 +2,6 @@ import { parseCookies } from 'nookies';
 import axios from 'axios';
 
 export default async function LoggedIn(req, res) {
-  const cookies = parseCookies({ req });
-  const token = cookies.authToken;
   const tokent = req.body.authToken;
 
   const userAuth = await axios
