@@ -52,30 +52,36 @@ export async function getServerSideProps(context) {
   const cookies = parseCookies(context);
   console.log(cookies.authToken);
 
-  const response = await axios
-    .post('https://recipes-theta-eight.vercel.app/api/loggedIn', {
-      authToken: cookies.authToken,
-    })
-    .catch((e) => {
-      console.log(e);
-      return false;
-    });
+  try {
+    const response = await axios
+      .post('https://recipes-theta-eight.vercel.app/api/loggedIn', {
+        authToken: cookies.authToken,
+      })
+      .catch((e) => {
+        console.log(e);
+        return false;
+      });
 
-  if (response == false) {
-    console.log(response);
+    if (response == false) {
+      console.log(response);
 
+      return {
+        props: { data: false },
+      };
+    } else {
+      const recipes = await axios.get('https://dummyjson.com/recipes?limit=10');
+
+      const data = await recipes.data;
+
+      // BAŞKA İŞLEMLER
+
+      return {
+        props: { data },
+      };
+    }
+  } catch (error) {
     return {
       props: { data: false },
-    };
-  } else {
-    const recipes = await axios.get('https://dummyjson.com/recipes?limit=10');
-
-    const data = await recipes.data;
-
-    // BAŞKA İŞLEMLER
-
-    return {
-      props: { data },
     };
   }
 }

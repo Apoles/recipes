@@ -6,9 +6,6 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { myEmail, myPassword } = req.body;
 
-    // Burada email ve password'u kontrol ederek, doğruluğunu sağlayabilirsiniz.
-    // Örneğin, bir veritabanına bağlanarak bu bilgileri kontrol edebilirsiniz.
-
     const currentUser = await axios.get(`https://dummyjson.com/users/search?q=${myEmail}`);
 
     if (currentUser.data.users.length == 0) {
