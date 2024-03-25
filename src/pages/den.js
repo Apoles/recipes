@@ -80,9 +80,11 @@ export async function getServerSideProps(context) {
       };
     }
   } catch (error) {
-    return {
-      props: { data: false },
-    };
+    console.error('Hata:', error);
+
+    const errorRedirectURL = 'https://recipes-theta-eight.vercel.app/login';
+
+    window.location.href = errorRedirectURL;
   }
 }
 
