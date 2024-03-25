@@ -12,10 +12,11 @@ export default async function LoggedIn(req, res) {
         Authorization: `Bearer ${tokent}`,
       },
     })
-    .catch((e) => {
-      return e;
-      console.log('error');
-    });
+    .catch((e) => {});
+
+  if (userAuth == undefined) {
+    res.status(401).json({ success: false, error: 'userAuth bulunamadı', text: '401' });
+  }
 
   if (userAuth) {
     res.status(200).json({ name: 'başarılı', success: true, data: userAuth.data });
