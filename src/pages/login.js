@@ -21,14 +21,11 @@ const Login = () => {
 
     try {
       const response = await axios.post('/api/login', { myEmail, myPassword });
-      console.log(response.data.success, '====ASDASDASDAS');
 
       if (response.data.success === true) {
         router.push('/');
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return (

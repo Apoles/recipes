@@ -12,12 +12,9 @@ export default function Home({ data }) {
 
   useEffect(() => {
     if (data == false) {
-      console.log('ife -gridi-+++++++');
       router.push('/login');
     }
   }, []);
-
-  console.log(data, 'asdaadasd asd');
 
   if (router.isFallback) {
     return <div>Loading...</div>;
@@ -64,8 +61,6 @@ export async function getServerSideProps(context) {
     .catch((e) => {
       return false;
     });
-
-  console.log(response, '==============>');
 
   if (response == false) {
     return {

@@ -63,17 +63,17 @@ export default function MyHeader() {
                   </Link>
                 </li>
                 <li className='text-white'>
-                  <Link href='/blogs'>
+                  <Link href='/'>
                     <p>Explore</p>
                   </Link>
                 </li>
                 <li className='text-white'>
-                  <Link href='/about'>
+                  <Link href='/'>
                     <p>About US</p>
                   </Link>
                 </li>
                 <li className='text-white'>
-                  <Link href='/contact'>
+                  <Link href='/login'>
                     <p>Login</p>
                   </Link>
                 </li>

@@ -9,7 +9,6 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 export default function RecipePage({ data, error }) {
-  console.log(data);
   const router = useRouter();
   const { slug } = router.query;
 

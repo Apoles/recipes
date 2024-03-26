@@ -9,12 +9,10 @@ export default async function handler(req, res) {
     const currentUser = await axios.get(`https://dummyjson.com/users/search?q=${myEmail}`);
 
     if (currentUser.data.users.length == 0) {
-      console.log('+++++++++++++++++++++++++++');
       return res.status(401).json({ success: false, message: 'Kullanici bulunamadi  ' });
     }
 
     if (currentUser.data.users[0].password == myPassword) {
-      console.log('ife girdi');
       const userToken = await axios
         .post(
           'https://dummyjson.com/auth/login',
@@ -54,7 +52,7 @@ export default async function handler(req, res) {
           res.status(401).json({ success: false, message: 'invalid  token ' });
         });
 
-      console.log(userAuth, ')asdasd userAuth');*/
+      */
 
       res.status(200).json({ success: true, message: 'giriş başarılı ' });
     } else {
