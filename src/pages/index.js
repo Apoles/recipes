@@ -22,10 +22,10 @@ export default function Home({ data }) {
       >
         <ImageCard></ImageCard>
         <div className='lg:mt-12 max-sm:w-60 max-sm:content-center flex flex-row items-center  lg:space-x-6 max-lg:grid max-lg:grid-cols-2 max-sm:grid-cols-1 max-lg:gap-4 max-sm:mb-12  max-lg:mt-12  '>
-          <ButtonCard title={'Tarifler ve Menüler'} hex={'bg-[#F6784C]'}></ButtonCard>
-          <ButtonCard title={'Tarifinizi Paylaşın'} hex={'bg-[#C4D600]'}></ButtonCard>
-          <ButtonCard title={'Özel Tarifler'} hex={'bg-[#EAAA00]'}></ButtonCard>
-          <ButtonCard title={'Yemek Pişirme İpuçları '} hex={'bg-[#84BD00]'}></ButtonCard>
+          <ButtonCard title={'Recipes & Menus'} hex={'bg-[#F6784C]'}></ButtonCard>
+          <ButtonCard title={'Share your recipe'} hex={'bg-[#C4D600]'}></ButtonCard>
+          <ButtonCard title={'Custom meal plan'} hex={'bg-[#EAAA00]'}></ButtonCard>
+          <ButtonCard title={'Cooking Tips & Tricks '} hex={'bg-[#84BD00]'}></ButtonCard>
         </div>
 
         <div className='flex flex-col md:items-start items-center '>
