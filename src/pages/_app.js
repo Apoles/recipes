@@ -11,7 +11,7 @@ export default function App({ Component, pageProps, data }) {
 
   const fetchLoginStatus = async () => {
     try {
-      const response = (await axios.get('http://localhost:3000/api/loggedIn')).data;
+      const response = (await axios.get('https://recipes-theta-eight.vercel.app/api/loggedIn')).data;
 
       if (response) {
         console.log('var');
