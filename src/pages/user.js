@@ -26,6 +26,8 @@ export default function Home({ isLoggedIn, user }) {
   };
   const { data, error, isLoading } = useSWR(['https://recipes-theta-eight.vercel.app/loggedIn'], fetcher, {});
 
+  console.log(data);
+
   const paginatedData = useMemo(() => {
     if (!data) return [];
     const start = (currentPage - 1) * PAGE_SIZE;
