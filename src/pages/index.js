@@ -1,22 +1,39 @@
 import { Inter } from 'next/font/google';
 import MealCard from '../components/mealCard';
-import TopCard from '@/components/topCard';
 import MyHeader from '@/components/header';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment } from '@fortawesome/free-regular-svg-icons';
+
 import ButtonCard from '@/components/buttonCard';
 import MyFooter from '@/components/footer';
 import ImageCard from '@/components/imageCard';
-import Link from 'next/link';
 import axios from 'axios';
+import useSWR from 'swr';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function Home({ data }) {
+export default function Home({ isLoggedIn, user }) {
+  const fetcher = async (url) => {
+    const response = (await axios.get(url)).data;
+    return response;
+  };
+
+  const { data, error, isLoading } = useSWR(['https://dummyjson.com/recipes?limit=15'], fetcher, {
+    refreshInterval: 360000,
+  });
+
+  if (isLoading)
+    return (
+      <button type='button' className='flex max-w-7xl mx-auto h-screen items-center' disabled>
+        <svg className='animate-spin h-5 w-3 mr-3 bg-black' viewBox='0 0 24 24'></svg>
+        Processing...
+      </button>
+    );
+
+  if (error) {
+    return <div>HATALI İŞLE</div>;
+  }
+
   return (
     <main className=''>
-      <MyHeader></MyHeader>
-
       <div
         className={`flex min-h-screen flex-col items-center justify-between px-24 py-12 bg-gray-50 ${inter.className}`}
       >
@@ -33,7 +50,7 @@ export default function Home({ data }) {
             <span className='bg-clip-text text-black'>Recommended Recipes</span>
           </h1>
           <div className='  grid grid-cols-3 gap-6 max-md:grid-cols-2 max-sm:grid-cols-1 max-sm:w-screen max-sm:px-8  max-sm:flex max-sm:flex-col max-sm:items-center  '>
-            {data.recipes.map((item, key) => (
+            {data?.recipes?.map((item, key) => (
               <div key={key}>
                 <MealCard
                   key={key}
@@ -53,13 +70,4 @@ export default function Home({ data }) {
       <MyFooter></MyFooter>
     </main>
   );
-}
-
-export async function getServerSideProps() {
-  const data = (await axios.get('https://dummyjson.com/recipes?limit=15')).data;
-  return {
-    props: {
-      data,
-    },
-  };
 }

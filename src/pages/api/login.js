@@ -41,19 +41,6 @@ export default async function handler(req, res) {
         httpOnly: true, // JavaScript tarafından erişilememesini sağlar
       });
 
-      /*   const userAuth = await axios
-        .get('https://dummyjson.com/auth/me', {
-          headers: {
-            Authorization: `Bearer ${userToken.data.token}`,
-          },
-        })
-
-        .catch((error) => {
-          res.status(401).json({ success: false, message: 'invalid  token ' });
-        });
-
-      */
-
       res.status(200).json({ success: true, message: 'giriş başarılı ' });
     } else {
       res.status(401).json({ success: false, message: 'Password incorrect ' });

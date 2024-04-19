@@ -2,7 +2,8 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function MyHeader() {
+export default function MyHeader({ isLoggedIn, user }) {
+  console.log(isLoggedIn, 'issLogedIn');
   const [navbar, setNavbar] = useState(false);
   return (
     <div>
@@ -63,7 +64,7 @@ export default function MyHeader() {
                   </Link>
                 </li>
                 <li className='text-white'>
-                  <Link href='/'>
+                  <Link href='/user'>
                     <p>Explore</p>
                   </Link>
                 </li>
@@ -73,9 +74,7 @@ export default function MyHeader() {
                   </Link>
                 </li>
                 <li className='text-white'>
-                  <Link href='/login'>
-                    <p>Login</p>
-                  </Link>
+                  <Link href='/login'>{isLoggedIn == true ? <p>Wellcome {user.firstName}</p> : <p>Login</p>}</Link>
                 </li>
               </ul>
             </div>

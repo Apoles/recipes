@@ -43,10 +43,10 @@ const MealCard = ({ diffucult, title, star, time, image, url }) => {
             onClick={() => {
               router.push('/login');
             }}
-            className='w-10 h-10 text-red-600 hover:text-red-900 '
+            className='w-5 h-5 text-red-600 hover:text-red-900 '
             icon={faHeart}
           />
-          <FontAwesomeIcon className='w-10 h-10 ' icon={faComment} />
+          <FontAwesomeIcon className='w-5 h-5 ' icon={faComment} />
         </div>
       </div>
     </div>
