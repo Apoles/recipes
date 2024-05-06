@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import MyHeader from '@/components/header';
 
 const Login = () => {
   const [myEmail, setMyEmail] = useState('');
@@ -22,7 +23,6 @@ const Login = () => {
       const response = await axios.post('/api/login', { myEmail, myPassword });
 
       if (response.data.success === true) {
-        console.log(response.data, '====================');
         router.push('/user');
       }
     } catch (error) {}
@@ -30,6 +30,8 @@ const Login = () => {
 
   return (
     <div>
+      <MyHeader></MyHeader>
+
       <div className='md:0mt-24  flex flex-col justify-center max-sm:px-4 py-12 sm:px-6 lg:px-8 '>
         <div className='sm:mx-auto sm:w-full sm:max-w-md'>
           <h2 className='mt-6 text-center text-3xl font-extrabold text-gray-900'>Sign in to your account</h2>

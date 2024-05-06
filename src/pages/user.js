@@ -1,3 +1,4 @@
+import MyHeader from '@/components/header';
 import MealCard from '@/components/mealCard';
 import axios from 'axios';
 import Link from 'next/link';
@@ -13,32 +14,29 @@ export default function Home({ isLoggedIn, user }) {
   const [currentPage, setCurrentPage] = useState(INITIAL_PAGE);
   const [recipes, setRecipes] = useState([]);
   const [pageCount, setPageCount] = useState([]);
+  const [data, setData] = useState();
+  const [isLog, setIsLog] = useState();
 
-  const fetcher = async (url) => {
-    const response = await axios.post(url[0]);
+  // const { data, error, isLoading } = useSWR(['https://recipes-theta-eight.vercel.app/api/loggedIn'], fetcher, {});
+  /*const { data, error, isLoading, isValidating } = useSWR('http://localhost:3000/api/loggedIn', fetcher, {
+    shouldRetryOnError: false,
+  });
 
-    if (response.data.success == true) {
-      const recipes = (await axios.get('https://dummyjson.com/recipes')).data;
-      return { recipes: recipes, response: response.data.user };
-    } else {
-      return false;
-    }
-  };
-  const { data, error, isLoading } = useSWR(['https://recipes-theta-eight.vercel.app/api/loggedIn'], fetcher, {});
-
-  console.log(data);
-
+  console.log(data, '=======>data');
+  console.log(error, 'error======>');
+  console.log(isLoading, ',sloading ======>');
+*/
   const paginatedData = useMemo(() => {
     if (!data) return [];
     const start = (currentPage - 1) * PAGE_SIZE;
     const end = start + PAGE_SIZE;
 
-    const items = Array.from({ length: data.recipes.recipes.length / PAGE_SIZE }, (_, index) => index + 1);
+    const items = Array.from({ length: data.recipes?.length / PAGE_SIZE }, (_, index) => index + 1);
     setPageCount(items);
 
-    setRecipes(data.recipes.recipes.slice(start, end));
+    setRecipes(data.recipes?.slice(start, end));
 
-    return data.recipes.recipes.slice(start, end);
+    return data.recipes?.slice(start, end);
   }, [data, currentPage]);
 
   const handleNextPage = () => {
@@ -51,25 +49,56 @@ export default function Home({ isLoggedIn, user }) {
 
   const router = useRouter();
 
-  console.log(pageCount);
-
   useEffect(() => {
-    if (error) {
-      console.log(error);
-    }
-  }, [error]);
+    const fetcher = async () => {
+      const response = await axios.post('/api/loggedIn').catch((e) => {
+        setIsLog(false);
+        return false;
+      });
 
-  if (isLoading)
+      if (response.data?.success == true) {
+        const recipes = (await axios.get('https://dummyjson.com/recipes')).data;
+        setData(recipes);
+
+        return { recipes: recipes, response: response.data.user };
+      } else {
+        setIsLog(false);
+
+        return false;
+      }
+    };
+
+    fetcher();
+  }, []);
+
+  if (isLog == false)
+    return (
+      <div className='grid h-screen place-content-center bg-white px-4'>
+        <div className='text-center'>
+          <h1 className='text-9xl font-black text-gray-400'>404</h1>
+
+          <p className='mt-4 text-gray-500'>We cant find that page.</p>
+
+          <Link
+            href='/'
+            className='mt-6 inline-block rounded bg-gray-800 px-5 py-3 text-sm font-medium text-white hover:bg-gray-900 focus:outline-none focus:ring'
+          >
+            Go Back Home
+          </Link>
+        </div>
+      </div>
+    );
+
+  if (!data) {
     return (
       <button type='button' className='flex max-w-7xl mx-auto h-screen items-center' disabled>
         <svg className='animate-spin h-5 w-3 mr-3 bg-black' viewBox='0 0 24 24'></svg>
         Processing...
       </button>
     );
+  }
 
-  console.log('çalışıyor usser');
-
-  if (error) {
+  /*  if (error) {
     return (
       <div className='grid h-screen place-content-center bg-white px-4'>
         <div className='text-center'>
@@ -87,10 +116,12 @@ export default function Home({ isLoggedIn, user }) {
       </div>
     );
   }
-
+*/
   if (data) {
     return (
       <div>
+        <MyHeader></MyHeader>
+
         <div className='max-w-5xl mx-auto flex flex-col md:items-start items-center '>
           <div className='flex flex-row items-center mb-8 max-sm:flex-col max-sm:space-y-3  justify-evenly mt-16  w-full mx-auto'>
             <div className='text-center  '>

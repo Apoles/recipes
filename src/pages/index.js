@@ -10,7 +10,7 @@ import useSWR from 'swr';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function Home({ isLoggedIn, user }) {
+export default function Home() {
   const fetcher = async (url) => {
     const response = (await axios.get(url)).data;
     return response;
@@ -28,12 +28,14 @@ export default function Home({ isLoggedIn, user }) {
       </button>
     );
 
-  if (error) {
+  /*if (error) {
     return <div>HATALI İŞLE</div>;
-  }
+  }*/
 
   return (
     <main className=''>
+      <MyHeader></MyHeader>
+
       <div
         className={`flex min-h-screen flex-col items-center justify-between px-24 py-12 bg-gray-50 ${inter.className}`}
       >

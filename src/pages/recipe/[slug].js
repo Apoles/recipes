@@ -1,4 +1,5 @@
 const axios = require('axios');
+import MyHeader from '@/components/header';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
@@ -19,6 +20,8 @@ export default function RecipePage({ data, error }) {
         <title>{data.name} Tarifi - Yemekler</title>
         <meta name='description' content={data.name} />
       </Head>
+      <MyHeader></MyHeader>
+
       <div className='    overflow-y-auto lg:mt-12 flex flex-col items-center justify-center p-4  lg:items-start lg:flex-row lg:space-x-12  max-w-7xl mx-auto '>
         <div className='max-lg:my-12  '>
           <img className='rounded-xl ' src={data.image} alt={data.name} width={600} height={100} />
