@@ -52,6 +52,7 @@ export default function Home({ isLoggedIn, user }) {
   useEffect(() => {
     const fetcher = async () => {
       const response = await axios.post('/api/loggedIn').catch((e) => {
+        console.log('e', e);
         setIsLog(false);
         return false;
       });
