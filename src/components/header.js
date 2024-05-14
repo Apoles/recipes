@@ -14,7 +14,6 @@ export default function MyHeader() {
   const fetcher = async (url) => {
     const response = (await axios.get(url)).data;
     if (response) {
-      console.log('ife girdi');
       setLog(true);
     }
 
@@ -119,10 +118,7 @@ export default function MyHeader() {
       try {
         await axios.post('/api/logOut'); // logout API endpoint'ini çağır
         window.location.href = '/';
-      } catch (error) {
-        console.log(error);
-        console.error('Oturum kapatılırken bir hata oluştu:', error);
-      }
+      } catch (error) {}
     };
 
     return (

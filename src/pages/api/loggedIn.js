@@ -11,7 +11,6 @@ export default async function LoggedIn(req, res) {
       },
     })
     .catch((e) => {
-      console.log('auth hata');
       return res.status(401).json({ success: false, error: 'hatta', text: '401' });
     });
 

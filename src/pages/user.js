@@ -22,9 +22,7 @@ export default function Home({ isLoggedIn, user }) {
     shouldRetryOnError: false,
   });
 
-  console.log(data, '=======>data');
-  console.log(error, 'error======>');
-  console.log(isLoading, ',sloading ======>');
+
 */
   const paginatedData = useMemo(() => {
     if (!data) return [];
@@ -52,7 +50,6 @@ export default function Home({ isLoggedIn, user }) {
   useEffect(() => {
     const fetcher = async () => {
       const response = await axios.post('/api/loggedIn').catch((e) => {
-        console.log('e', e);
         setIsLog(false);
         return false;
       });
@@ -234,7 +231,6 @@ export async function getServerSideProps(context) {
       authToken: cookies.authToken,
     })
     .catch((e) => {
-      console.log('girdiii');
       return false;
     });
 
