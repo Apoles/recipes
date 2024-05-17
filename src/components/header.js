@@ -93,14 +93,10 @@ export default function MyHeader() {
                   </li>
                   <li className='text-white'>
                     <Link href='/user'>
-                      <p>Explore</p>
+                      <p>User</p>
                     </Link>
                   </li>
-                  <li className='text-white'>
-                    <Link href='/'>
-                      <p>About US</p>
-                    </Link>
-                  </li>
+
                   <li className='text-white'>
                     <p> loading </p>
                   </li>
@@ -181,16 +177,7 @@ export default function MyHeader() {
                       <p>Home</p>
                     </Link>
                   </li>
-                  <li className='text-white'>
-                    <Link href='/'>
-                      <p>Explore</p>
-                    </Link>
-                  </li>
-                  <li className='text-white'>
-                    <Link href='/'>
-                      <p>About US</p>
-                    </Link>
-                  </li>
+
                   <li className='text-white'>
                     <Link href='/user'>
                       Welcome {data.user.firstName}
@@ -284,14 +271,10 @@ export default function MyHeader() {
                   </li>
                   <li className='text-white'>
                     <Link href='/user'>
-                      <p>Explore</p>
+                      <p>User</p>
                     </Link>
                   </li>
-                  <li className='text-white'>
-                    <Link href='/'>
-                      <p>About US</p>
-                    </Link>
-                  </li>
+
                   <li className='text-white'>
                     <Link href='/login'>Login</Link>
                   </li>

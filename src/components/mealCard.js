@@ -41,7 +41,7 @@ const MealCard = ({ diffucult, title, star, time, image, url }) => {
           {' '}
           <FontAwesomeIcon
             onClick={() => {
-              router.push('/login');
+              console.log('bastı');
             }}
             className='w-5 h-5 text-red-600 hover:text-red-900 '
             icon={faHeart}
