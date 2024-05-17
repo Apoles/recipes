@@ -207,12 +207,12 @@ export default function Home() {
             <button className='bg-gray-50 rounded-md p-1 hover:bg-gray-200' onClick={handlePrevPage}>
               Önceki Sayfa
             </button>
-            <div className='flex flex-row max-w-5xl space-x-3 '>
+            <div className='flex max-lg:hidden  flex-row max-w-5xl space-x-3 '>
               {Array.from({ length: pageCount }).map((_, index) => (
-                <div key={index}>
+                <div className='' key={index}>
                   <button
                     key={index}
-                    className={`  flex items-center justify-center  px-4 py-2 w-5 h-5  ${
+                    className={` flex items-center justify-center  px-4 py-2 w-5 h-5  ${
                       selectedButton === index ? 'bg-blue-600 text-white' : 'bg-blue-400 text-black'
                     } text-white rounded `}
                     onClick={() => {
@@ -226,6 +226,9 @@ export default function Home() {
                 </div>
               ))}
             </div>
+            <p className=' px-4 py-2 w-5 h-5 bg-blue-600 text-white lg:hidden flex items-center justify-center'>
+              {selectedButton}
+            </p>
 
             <button className='bg-gray-50 rounded-md p-1 hover:bg-gray-200' onClick={handleNextPage}>
               Sonraki Sayfa
